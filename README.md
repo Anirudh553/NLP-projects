@@ -1,34 +1,51 @@
 # Emotion Classification using BERT (PyTorch)
 
-##  Project Overview
-This project performs **multi-class emotion classification** on text using a **fine-tuned BERT model** implemented in **pure PyTorch**.
+## 1. Approach
+This project performs **multi-class emotion classification** on text using a **fine-tuned BERT model** implemented in **pure PyTorch** (without HuggingFace Trainer).
 
-The notebook demonstrates the complete NLP workflow:
-- Exploratory Data Analysis (EDA)
-- Manual fine-tuning of a pretrained transformer
-- Evaluation using standard classification metrics
-- Inference on custom text examples
-
----
-
-##  Dataset
-- **Source:** Hugging Face  
-- **Dataset:** emotion-dataset-20-emotions  
-- **Classes:** 20 emotion categories  
-- **Size:** ~80k sentences  
+Workflow followed:
+- Loaded the emotion dataset from Hugging Face.
+- Performed **Exploratory Data Analysis (EDA)** to inspect class distribution and imbalance.
+- Tokenized text using **BERT tokenizer**.
+- Manually fine-tuned **bert-base-uncased** using a **custom PyTorch training loop**.
+- Evaluated the model on a held-out test set.
+- Built an **inference function** to predict emotions for new text.
 
 ---
 
-##  Model Details
-- **Base model:** `bert-base-uncased`
-- **Framework:** PyTorch (no HuggingFace Trainer used)
-- **Task:** Multi-class text classification
-- **Training:** Fine-tuned on emotion dataset
+## 2. Assumptions
+- The dataset labels correctly represent the underlying emotions.
+- A **train–test split of 90:10** is sufficient for evaluation.
+- Fine-tuning for **1–2 epochs** is adequate for demonstrating learning in an academic setting.
+- Weighted evaluation metrics are appropriate due to slight class imbalance.
 
 ---
 
-##  Evaluation Metrics
-The model is evaluated on a held-out test set using:
+## 3. Observations
+- Training loss **decreased over epochs**, confirming successful fine-tuning.
+- The model achieved **reasonable accuracy and F1-score** for a multi-class emotion task.
+- Confusion matrix shows that **semantically similar emotions** are occasionally misclassified.
+- Using **GPU significantly reduces training time** compared to CPU.
+
+---
+
+## Dataset
+- Source: Hugging Face  
+- Name: emotion-dataset-20-emotions  
+- Size: ~80k text samples  
+- Classes: 20 emotion categories  
+
+---
+
+## Model Details
+- Base model: `bert-base-uncased`
+- Framework: **PyTorch only**
+- Task: Multi-class text classification
+- Training: Manual fine-tuning loop
+
+---
+
+## Evaluation Metrics
 - Accuracy  
 - Precision (weighted)  
 - Recall (weighted)  
@@ -37,37 +54,6 @@ The model is evaluated on a held-out test set using:
 
 ---
 
-##  Inference
-A function `predict_text(text: str)` is implemented to:
-- Predict the emotion label
-- Return confidence score
-- Test on custom user-provided sentences
-
----
-
-## 🚀 How to Run
-1. Open the notebook:
-2. Run all cells in **Google Colab** (GPU recommended).
-3. View:
-- Training logs  
-- Evaluation metrics  
-- Confusion matrix  
-- Sample predictions  
-
----
-
-## 📎 Repository Contents
-- `nlp_banana_1.ipynb` → Complete implementation notebook  
-- `README.md` → Project documentation  
-
----
-
-## 👨‍💻 Author
-**Anirudh**
-
----
-
-## 📚 References
-- Hugging Face Transformers  
-- BERT: Bidirectional Encoder Representations from Transformers  
+## Inference
+Function implemented:
 
